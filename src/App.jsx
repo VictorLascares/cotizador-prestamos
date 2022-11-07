@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import Button from "./components/Button";
-import { formatMoney } from "./helpers";
+import { formatMoney, calculateTotalPay } from "./helpers";
 
 function App() {
   const [amount, setAmount] = useState(10000);
