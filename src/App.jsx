@@ -7,13 +7,23 @@ function App() {
   const [amount, setAmount] = useState(10000);
   const [term, setTerm] = useState("6");
   const [total, setTotal] = useState(calculateTotalPay(amount, term));
+  const [payment, setPayment] = useState(0);
+
   const MIN = 0;
   const MAX = 20000;
   const STEP = 100;
 
   useEffect(() => {
     setTotal(calculateTotalPay(amount, term));
+
+    // Calcular el pago mensual
+    setPayment(total / Number(term))
   }, [amount, term]);
+
+  useEffect(() => {
+    // Calcular el pago mensual
+    setPayment(total / Number(term))
+  }, [total]);
 
   function handleChange(e) {
     setAmount(Number(e.target.value));
@@ -79,12 +89,14 @@ function App() {
         </h2>
 
         <p className="text-xl text-gray-500 text-center font-bold">
-          {term} Meses
+          {term} meses
         </p>
         <p className="text-xl text-gray-500 text-center font-bold">
-          {formatMoney(total)} Total a pagar
+          {formatMoney(total)} total a pagar
         </p>
-        <p className="text-xl text-gray-500 text-center font-bold">Mensuales</p>
+        <p className="text-xl text-gray-500 text-center font-bold">
+          {formatMoney(payment)} mensuales
+        </p>
       </div>
     </div>
   );
