@@ -3,6 +3,9 @@ import Header from "./components/Header";
 
 function App() {
   const [amount, setAmount] = useState(10000);
+  const MIN = 0;
+  const MAX = 20000;
+  const STEP = 100;
 
   function handleChange(e) {
     setAmount(e.target.value)
@@ -15,6 +18,10 @@ function App() {
         type="range"
         className="w-full bg-gray-200 accent-lime-500 hover:accent-lime-600"
         onChange={ handleChange }
+        min={MIN}
+        max={MAX}
+        step={STEP}
+        value={amount}
       />
       <p className="text-center my-10 text-5xl font-extrabold text-indigo-600">{ amount }</p>
     </div>
