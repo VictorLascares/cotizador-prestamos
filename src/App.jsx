@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Button from "./components/Button";
 import { formatMoney, calculateTotalPay } from "./helpers";
@@ -6,9 +6,14 @@ import { formatMoney, calculateTotalPay } from "./helpers";
 function App() {
   const [amount, setAmount] = useState(10000);
   const [term, setTerm] = useState("6");
+  const [total, setTotal] = useState(calculateTotalPay(amount, term));
   const MIN = 0;
   const MAX = 20000;
   const STEP = 100;
+
+  useEffect(() => {
+    setTotal(calculateTotalPay(amount, term));
+  }, [amount, term]);
 
   function handleChange(e) {
     setAmount(Number(e.target.value));
@@ -77,7 +82,7 @@ function App() {
           {term} Meses
         </p>
         <p className="text-xl text-gray-500 text-center font-bold">
-          Total a pagar
+          {formatMoney(total)} Total a pagar
         </p>
         <p className="text-xl text-gray-500 text-center font-bold">Mensuales</p>
       </div>
